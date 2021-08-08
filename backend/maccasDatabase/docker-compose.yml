@@ -5,8 +5,8 @@ services:
   mysql-development:
     image: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: groupproject
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: maccas
     ports: 
-      - "3331:3306"
-# mapping 3331 port
+      - "3333:3306"
+# mapping 3333 port
