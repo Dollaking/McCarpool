@@ -46,11 +46,11 @@ public class DataLoader implements ApplicationRunner {
 	@Modifying
 	public void run(ApplicationArguments args) throws Exception {
 		//Create User
-		User aven = new User("Dollaking", "Aven", "Au");
-		User justin = new User("Masterwarrior", "Justin", "Chau");
-		User tony = new User("WangRooney", "Tony", "Wang");
-		User jimmy = new User("NuggetMuncher", "Jimmy", "Pham");
-		User megan = new User("Meegz", "Megan", "Tang");
+		User aven = new User("dollaking", "password", "Aven", "Au");
+		User justin = new User("Masterwarrior", "password", "Justin", "Chau");
+		User tony = new User("WangRooney", "password", "Tony", "Wang");
+		User jimmy = new User("NuggetMuncher", "password", "Jimmy", "Pham");
+		User megan = new User("Meegz", "password", "Megan", "Tang");
 		
 		userService.save(megan);
 		userService.save(jimmy);
@@ -58,7 +58,11 @@ public class DataLoader implements ApplicationRunner {
 		userService.save(aven);
 		userService.save(justin);
 		
+		Post tonight = new Post(aven, "Maccas Run Tonight?");
+		postService.save(tonight);
+		
 		System.out.println("Find All Users: " + userService.findAll());
+		System.out.println("All Posts: " + postService.findAll());
 		
 	}
 

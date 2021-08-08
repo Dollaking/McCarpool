@@ -1,5 +1,7 @@
 package com.avenau.McCarpool.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.avenau.McCarpool.models.Post;
@@ -30,6 +32,11 @@ public class PostService {
 	
 	public void delete(Post post) {
 		postRepo.delete(post);
+	}
+
+	public List<Post> findAll() {
+		// TODO Auto-generated method stub
+		return postRepo.findAll();
 	}
 	
 	

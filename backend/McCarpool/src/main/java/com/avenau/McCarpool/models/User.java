@@ -1,6 +1,7 @@
 package com.avenau.McCarpool.models;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -20,6 +21,8 @@ public class User {
 	private String username;
 	private String firstName;
 	private String lastName;
+	private String password;
+	private byte[] image;
 	
 	@OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
 	private List<Post> ownedPosts;
@@ -43,11 +46,14 @@ public class User {
 	
 	
 
-	public User(String username, String firstName, String lastName) {
+	public User(String username, String password, String firstName, String lastName) {
 		super();
 		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.password = password;
+		this.image = "random".getBytes();
+		
 		this.ownedPosts = new ArrayList<Post> ();
 		this.participatingPosts = new ArrayList<Post> ();
 		this.ratingList = new ArrayList<DriverRating> ();
@@ -55,13 +61,15 @@ public class User {
 		this.commentsMade = new ArrayList<Comment> ();
 	}
 
-	public User(String username, String firstName, String lastName, List<Post> ownedPosts,
-			List<Post> participatingPosts, List<DriverRating> ratingList, List<DriverRating> ratingsMade,
-			List<Comment> commentsMade) {
+	public User(String username, String firstName, String lastName, String password, byte[] image,
+			List<Post> ownedPosts, List<Post> participatingPosts, List<DriverRating> ratingList,
+			List<DriverRating> ratingsMade, List<Comment> commentsMade) {
 		super();
 		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.password = password;
+		this.image = image;
 		this.ownedPosts = ownedPosts;
 		this.participatingPosts = participatingPosts;
 		this.ratingList = ratingList;
@@ -141,14 +149,34 @@ public class User {
 
 
 
+	public String getPassword() {
+		return password;
+	}
+
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", username=" + username + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", ownedPosts=" + ownedPosts + ", participatingPosts=" + participatingPosts
-				+ ", ratingList=" + ratingList + ", ratingsMade=" + ratingsMade + ", commentsMade=" + commentsMade
-				+ "]";
-	}	
-	
+				+ lastName + ", password=" + password + ", image=" + Arrays.toString(image) + ", ownedPosts="
+				+ ownedPosts + ", participatingPosts=" + participatingPosts + ", ratingList=" + ratingList
+				+ ", ratingsMade=" + ratingsMade + ", commentsMade=" + commentsMade + "]";
+	}
+
+
+
 	
 
 }

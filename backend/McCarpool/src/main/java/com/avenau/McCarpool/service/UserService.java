@@ -1,6 +1,7 @@
 package com.avenau.McCarpool.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,16 @@ public class UserService {
 		return userRepo.findById(id).get();
 	}
 	
+	public User findByUsername(String username) {
+		Optional<User> requestedUser = userRepo.findByUsername(username);
+		System.out.println("FIND BY USERNAME: " + requestedUser);
+		System.out.println("IS EMPTY " + requestedUser.isEmpty());
+		if (requestedUser.isEmpty()) {
+			return null;
+		}
+		return requestedUser.get();
+	}
+	
 	public List<User> findAll() {
 		return userRepo.findAll();
 	}
@@ -37,6 +48,14 @@ public class UserService {
 	
 	public void delete(User user) {
 		userRepo.delete(user);
+	}
+	
+	public boolean userExist(String username) {
+		User user = this.findByUsername(username);
+		if (user == null) {
+			return false;
+		}
+		return true;
 	}
 	
 	
