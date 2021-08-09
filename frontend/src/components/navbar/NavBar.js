@@ -2,15 +2,21 @@
 import { useState, useEffect } from "react"
 import { Navbar, Nav, NavDropdown, Container, NavLink } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { updateLength } from "../../redux/toolbar";
 
 
 function NavBar() {
     const history = useHistory();
-    let nav = <p>HELLO</p>;
-    let sessionLength = sessionStorage.length;
+    let nav = <LoggedOut/>;
+    const dispatch = useDispatch();
+    const sessionLength = useSelector((state) => state.toolbar.sessionLength);
+
 
     useEffect (() => {
-    }, [])
+        console.log("USE EFFECT!");
+
+    }, [sessionLength])
 
     function LogoutButton () {
 
@@ -23,6 +29,8 @@ function NavBar() {
 
     const logoutFunction = (() => {
          history.push('/');
+         sessionStorage.clear();
+         dispatch(updateLength());
     })
 
     function LoggedOut () {
@@ -73,14 +81,12 @@ function NavBar() {
         )
     }
 
-    if (sessionLength === 0){
-            nav = <LoggedOut/>
-        
+    if (sessionLength == 0){
+        nav = <LoggedOut/>
+    
     } else {
-            nav = <LoggedIn/>
+        nav = <LoggedIn/>
     }
-
-
     
 
 

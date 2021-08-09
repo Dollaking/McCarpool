@@ -1,6 +1,8 @@
 import { Container, Form, Button, Card, Alert } from "react-bootstrap";
 import { useState, useEffect } from "react"
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateLength } from "../../redux/toolbar";
 
 function Login() {
     let loginInput = "";
@@ -8,6 +10,7 @@ function Login() {
     let history = useHistory();
     const axios = require('axios')
     const [errorMessage, setError] = useState("");
+    const dispatch = useDispatch();
 
     const handleLoginChange = ((event) => {
         loginInput = event.target.value;
@@ -28,16 +31,19 @@ function Login() {
             console.log(response.data);
             if (response.data.status === "success"){
                 sessionStorage.setItem('username', response.data.username);
+                dispatch(updateLength());
                 history.push('/');
-
             } else {
+                
                 console.log("RESPONSE " + response.data.error);
                 setError(response.data.error);
+               
             }
             
         })
         .catch((error) => {
             console.log("Error: " + error.message);
+            setError("There is an error with login!");
         })
         .finally()
     })

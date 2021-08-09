@@ -26,8 +26,6 @@ public class UserService {
 	
 	public User findByUsername(String username) {
 		Optional<User> requestedUser = userRepo.findByUsername(username);
-		System.out.println("FIND BY USERNAME: " + requestedUser);
-		System.out.println("IS EMPTY " + requestedUser.isEmpty());
 		if (requestedUser.isEmpty()) {
 			return null;
 		}
